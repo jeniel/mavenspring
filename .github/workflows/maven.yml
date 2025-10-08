@@ -13,6 +13,9 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+permissions:
+  contents: read         # kailangan para i-checkout ang code
+  security-events: write # kailangan para mag-submit ng dependency snapshot
 
 jobs:
   build:
