@@ -7,7 +7,8 @@
 # documentation.
 
 name: Java CI with Maven
-
+permissions:
+  contents: write  # ✅ Allow push to repo
 on:
   push:
     branches: [ "main" ]
