@@ -60,5 +60,12 @@ jobs:
         git commit -m "ci: update image ${TAG}" || echo "no changes"
         git push
 
-    - name: Run Docker Compose
-      run: docker compose up -d
+    - name: Build Docker images and start services
+      run: docker compose up -d --build
+
+    - name: Wait for Postgres to be ready
+      run: |
+        until docker exec $(docker ps -q -f name=postgres) pg_isready -U petclinic; do
+          echo "Waiting for Postgres..."
+           sleep 3
+        done
