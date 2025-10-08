@@ -60,12 +60,11 @@ jobs:
         git commit -m "ci: update image ${TAG}" || echo "no changes"
         git push
 
-    - name: Build Docker images and start services
-      run: docker compose up -d --build
+    - name: Build Docker image
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mavenspring:${{ github.sha }} .
 
-    - name: Wait for Postgres to be ready
+    - name: Push Docker image
       run: |
-        until docker exec $(docker ps -q -f name=postgres) pg_isready -U petclinic; do
-          echo "Waiting for Postgres..."
-           sleep 3
-        done
+        echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/mavenspring:${{ github.sha }}  
+
