@@ -45,14 +45,14 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/spring-hello:${{ github.sha }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/mavenspring:${{ github.sha }}
 
     - name: Install yq
       run: sudo wget -qO /usr/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && sudo chmod +x /usr/bin/yq
 
     - name: Update helm values                                                  # pangalan lang
       run: |                                                                        # gi gamit for multi lines sa ubos taman naay indention
-        IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/spring-hello                       # link sa secret_ user ug name sa gi deploy                   
+        IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/mavenspring                     # link sa secret_ user ug name sa gi deploy                   
         TAG=${{ github.sha }}                                                      # e trace kung unsay version gi gamit sa app
         yq eval -i ".image.repository = strenv(IMAGE)" helm/values.yaml            # gamit para mag update sa helm values
         yq eval -i ".image.tag = strenv(TAG)" helm/values.yaml
