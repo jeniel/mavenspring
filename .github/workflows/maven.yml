@@ -29,7 +29,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B verify -Dspring.profiles.active=default -DskipITs
+
 
     - name: Log in to DockerHub
       uses: docker/login-action@v2
