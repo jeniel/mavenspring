@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jeniel/mavenspring.git
+    targetRevision: HEAD
+    path: helm
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mavenspring-namespace
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace= true
+
+    automated:
+      selfHeal: true
+      prune: true
