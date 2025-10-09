@@ -11,6 +11,7 @@ spec:
     path: helm
   destination:
     server: https://kubernetes.default.svc
+    namespace: default   # must match your Helm chart resources
   syncPolicy:
     automated:
       selfHeal: true
