@@ -1,0 +1,61 @@
+# Argo CD values.yaml for MicroK8s with PVC + LoadBalancer
+
+# Namespace to install Argo CD
+namespace: argocd
+
+# Argo CD server (UI/API)
+server:
+  service:
+    type: LoadBalancer        # Expose Argo CD externally
+    port: 80
+  persistence:
+    enabled: true             # Enable PVC
+    size: 5Gi
+    storageClass: "microk8s-hostpath"
+
+# Argo CD Application Controller
+applicationController:
+  persistence:
+    enabled: true
+    size: 3Gi
+    storageClass: "microk8s-hostpath"
+
+# Argo CD Controller (optional)
+controller:
+  persistence:
+    enabled: true
+    size: 3Gi
+    storageClass: "microk8s-hostpath"
+
+# General service account settings
+serviceAccount:
+  create: true
+  automount: true
+  name: ""
+
+# Ingress settings (optional)
+ingress:
+  enabled: true
+  className: ""
+  annotations: {}
+  hosts:
+    - host: app.192.168.49.2.nip.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+# Resources (optional, leave empty for MicroK8s)
+resources: {}
+
+# Autoscaling (optional)
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+
+# Node scheduling
+nodeSelector: {}
+tolerations: []
+affinity: {}
