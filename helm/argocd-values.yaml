@@ -10,7 +10,7 @@ server:
     port: 80
   persistence:
     enabled: true             # Enable PVC
-    size: 5Gi
+    size: 4Gi
     storageClass: "microk8s-hostpath"
 
 # Argo CD Application Controller
