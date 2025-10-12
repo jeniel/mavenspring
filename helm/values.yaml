@@ -59,7 +59,7 @@ ingress:
     kubernetes.io/tls-acme: "true"
   hosts:
     - host: maven.192.168.254.153.nip.io
-      paths:
+      paths: 
         - path: /
           pathType: ImplementationSpecific
   tls: []
