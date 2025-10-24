@@ -10,9 +10,8 @@ metadata:
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-  nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
-  {{- with .Values.ingress.className }}
+  {{- with .Values.ingress.ssl-redirect }}
   {{- with .Values.ingress.className }}
   ingressClassName: {{ . }}
   {{- end }}
