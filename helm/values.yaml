@@ -59,7 +59,7 @@ ingress:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
   hosts:
-    - host: maven.192.168.254.125.nip.io
+    - host: maven.10.30.60.218.nip.io
       paths:
         - path: /
           pathType: ImplementationSpecific
